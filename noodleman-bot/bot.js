@@ -5,11 +5,21 @@ var botID = process.env.BOT_ID;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
-      baileyRegex = /^\/bailey$/;
+      baileyRegex = /^\/bailey$/,
+      chaseRegex = /^\/chase$/,
+      spencerRegex = /^\/spencer$/;
 
   if(request.text && baileyRegex.test(request.text)) {
     this.res.writeHead(200);
-    postMessage();
+    postMessage("Existence is torment.");
+    this.res.end();
+  } else if(request.text && chaseRegex.test(request.text)) {
+    this.res.writeHead(200);
+    postMessage("REEEEEE.");
+    this.res.end();
+  } else if(request.text && spencerRegex.test(request.text)) {
+    this.res.writeHead(200);
+    postMessage("Poop monster.");
     this.res.end();
   } else {
     console.log("don't care");
@@ -18,10 +28,10 @@ function respond() {
   }
 }
 
-function postMessage() {
+function postMessage(var input) {
   var botResponse, options, body, botReq;
 
-  botResponse = "Existence is torment.";
+  botResponse = input;
 
   options = {
     hostname: 'api.groupme.com',
